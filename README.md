@@ -10,7 +10,7 @@ This project is a clone (with some added goodness) of Instagram built using Flut
 - **🫂 Follow/Unfollow:** Users can follow or unfollow other users, similar to the original Instagram functionality.
 - **🔎 Searching Users:** Users can Search for other users, and see all their posts directly.
 - **📋 Edit Profile:** Users can edit their profile anytime they want.
-- **✨ Generative AI:** Users can generate images from prompt, and directly post it (NOT WORKING CURRENTLY).
+- **✨ Generative AI:** Users can generate images from prompt (USING META AI), and directly post it.
 
 ## Getting Started
 
@@ -126,3 +126,4 @@ Contributions are welcome! Please follow these steps:
 - **The Flutter Community:** For the open-source libraries and resources that help in building and improving the app.
 - **IconFinder & Unsplash:** For the free icons and images used in the app design.
 - **Stack Overflow:** For the community support and solutions to common issues faced during development.
+- **[meta-ai-api](https://github.com/Strvm/meta-ai-api)**: This project utilizes code and concepts from [meta-ai-api](https://github.com/Strvm/meta-ai-api). Special thanks to the contributors for their valuable work.
