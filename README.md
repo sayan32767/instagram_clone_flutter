@@ -83,17 +83,17 @@ lib/firebase_options.dart
 
 Here are some screenshots of the app:
 
-### Home Feed
-[![Home Feed](https://drive.google.com/file/d/1UD8Y3TAgxwRKREfKwFbf1TGQFHyypV0j/view?usp=drive_link)](https://drive.google.com/file/d/1UD8Y3TAgxwRKREfKwFbf1TGQFHyypV0j/view?usp=drive_link)
+### Home Feed & Search Screen
+<div style="display: flex; gap: 10px;">
+    <img src="https://raw.githubusercontent.com/sayan32767/instagram_flutter/main/screenshots/Screenshot_20240817_113638_Insta.jpg" alt="Home Feed" width="150"/>
+    <img src="https://raw.githubusercontent.com/sayan32767/instagram_flutter/main/screenshots/screenshot2.jpg" alt="Search Screen" width="150"/>
+</div>
 
-### Search Screen
-[![Search Screen](https://drive.google.com/file/d/1egLzDdHN1Egfp6w1sX0QYs8k_MbpNL2-/view?usp=sharing)](https://drive.google.com/file/d/1egLzDdHN1Egfp6w1sX0QYs8k_MbpNL2-/view?usp=sharing)
-
-### Post Details
-[![Post Details](https://drive.google.com/file/d/1UAkX5gUlSJoKgA7wsSJv5_I13wAodeFF/view?usp=sharing)](https://drive.google.com/file/d/1UAkX5gUlSJoKgA7wsSJv5_I13wAodeFF/view?usp=sharing)
-
-### Image Upload
-[![GenAI Image Generation](https://drive.google.com/file/d/11IvcFLCkK5RtLintYKpv0RvECTCj0vZT/view?usp=sharing)](https://drive.google.com/file/d/11IvcFLCkK5RtLintYKpv0RvECTCj0vZT/view?usp=sharing)
+### Image Generation and Post Details
+<div style="display: flex; gap: 10px;">
+   <img src="https://raw.githubusercontent.com/sayan32767/instagram_flutter/main/screenshots/Screenshot_1723875662.png" alt="Image Generation" width="150"/>
+   <img src="https://raw.githubusercontent.com/sayan32767/instagram_flutter/main/screenshots/Screenshot_20240817_113937_Insta.jpg" alt="Post Details" width="150"/>
+</div>
 
 ## Contributing
 
