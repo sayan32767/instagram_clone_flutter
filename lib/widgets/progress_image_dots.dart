@@ -26,7 +26,7 @@ class ProgressImageDots extends StatelessWidget {
                   return Center(
                     child: SizedBox(
                       width: 50,
-                      child: Image.asset('assets/images/loading_dots_2.gif')
+                      child: Container()
                     )
                   );
                 }

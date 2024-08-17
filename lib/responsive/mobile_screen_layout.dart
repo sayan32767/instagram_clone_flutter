@@ -18,91 +18,107 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     pageController = PageController();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     pageController.dispose();
+    super.dispose();
   }
 
   void navigationTapped(int page) {
-     setState(() {
+    _navigatorKey.currentState?.popUntil((route) => route.isFirst);
+    pageController.jumpToPage(page);
+  }
+
+  void onPageChanged(int page) {
+    setState(() {
       _page = page;
     });
-    _navigatorKey.currentState?.pushReplacement(
-      PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => Provider.of<NavigationProvider>(context, listen: false).homeScreenItems[page],
-        transitionDuration: Duration.zero,
-      ),
-    );
+  }
+
+  Future<bool> _onWillPop() async {
+    if (_navigatorKey.currentState?.canPop() ?? false) {
+      _navigatorKey.currentState?.pop();
+      return false;
+    }
+    if (_page > 0) {
+      pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.decelerate,
+      );
+      return false;
+    }
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
+    final homeScreenItems =
+        Provider.of<NavigationProvider>(context, listen: false).homeScreenItems;
 
-    final homeScreenItems = Provider.of<NavigationProvider>(context, listen: false).homeScreenItems;
-
-    return Scaffold(
-      body: Navigator(
-        key: _navigatorKey,
-        onGenerateRoute: (settings) {
-          return MaterialPageRoute(
-            builder: (context) => homeScreenItems[_page],
-          );
-        },
-      ),
-      bottomNavigationBar: CupertinoTabBar(
-        height: 75,
-        backgroundColor: mobileBackgroundColor,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: _page == 0 ? primaryColor : secondaryColor,
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: Navigator(
+          key: _navigatorKey,
+          onGenerateRoute: (settings) {
+            return MaterialPageRoute(
+              builder: (context) => Stack(
+                fit: StackFit.expand,
+                children: [
+                PageView(
+                  controller: pageController,
+                  onPageChanged: onPageChanged,
+                  children: homeScreenItems,
+                  physics: const BouncingScrollPhysics(),
+                ),
+              ]),
+            );
+          },
+        ),
+        bottomNavigationBar: CupertinoTabBar(
+          height: 75,
+          backgroundColor: mobileBackgroundColor,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: _page == 0 ? primaryColor : secondaryColor,
+              ),
+              label: '',
+              backgroundColor: primaryColor,
             ),
-            label: '',
-            backgroundColor: primaryColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-              color: _page == 1 ? primaryColor : secondaryColor,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                color: _page == 1 ? primaryColor : secondaryColor,
+              ),
+              label: '',
+              backgroundColor: primaryColor,
             ),
-            label: '',
-            backgroundColor: primaryColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add_circle,
-              color: _page == 2 ? primaryColor : secondaryColor,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add_circle,
+                color: _page == 2 ? primaryColor : secondaryColor,
+              ),
+              label: '',
+              backgroundColor: primaryColor,
             ),
-            label: '',
-            backgroundColor: primaryColor,
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(
-          //     Icons.favorite,
-          //     color: _page == 3 ? primaryColor : secondaryColor,
-          //   ),
-          //   label: '',
-          //   backgroundColor: primaryColor,
-          // ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              color: _page == 3 ? primaryColor : secondaryColor,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+                color: _page == 3 ? primaryColor : secondaryColor,
+              ),
+              label: '',
+              backgroundColor: primaryColor,
             ),
-            label: '',
-            backgroundColor: primaryColor,
-          )
-        ],
-        currentIndex: _page,
-        onTap: navigationTapped,
+          ],
+          currentIndex: _page,
+          onTap: navigationTapped,
+        ),
       ),
     );
   }

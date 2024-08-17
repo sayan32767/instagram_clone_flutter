@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/models/user.dart';
 import 'package:instagram_flutter/providers/user_provider.dart';
@@ -125,51 +126,67 @@ class _PostCardState extends State<PostCard> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            username,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                username,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              SizedBox(width: 5),
+                              widget.snap['uid'] == 'un7YMrEEi0hBjfZmKH1pcL2dG662' ?
+                              SizedBox(
+                                height: 20,
+                                child: Image.asset(
+                                  'assets/images/verification_badge.png'
+                                ),
+                              ) : Container()
+                            ],
                           )
                         ],
                       ),
                     ),
                   ),
-                  // IconButton(
-                  //   onPressed: () {
-                  //     showDialog(
-                  //       context: context,
-                  //       builder: (context) => Dialog(
-                  //         child: ListView(
-                  //           padding: EdgeInsets.symmetric(
-                  //             vertical: 16,
-                  //           ),
-                  //           shrinkWrap: true,
-                  //           children: ['Delete']
-                  //               .map(
-                  //                 (e) => InkWell(
-                  //                   onTap: () async {
-                  //                     await FirestoreMethods().deletePost(widget.snap['postId']);
-                  //                     Navigator.of(context).pop();
-                  //                   },
-                  //                   child: Container(
-                  //                     padding: const EdgeInsets.symmetric(
-                  //                       vertical: 12,
-                  //                       horizontal: 16,
-                  //                     ),
-                  //                     child: Text(e),
-                  //                   ),
-                  //                 ),
-                  //               )
-                  //               .toList(),
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  //   icon: const Icon(
-                  //     Icons.more_vert,
-                  //   ),
-                  // )
+
+                  auth.FirebaseAuth.instance.currentUser!.uid == 'un7YMrEEi0hBjfZmKH1pcL2dG662' ?
+
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          child: ListView(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 16,
+                            ),
+                            shrinkWrap: true,
+                            children: ['Delete']
+                                .map(
+                                  (e) => InkWell(
+                                    onTap: () async {
+                                      await FirestoreMethods().deletePost(widget.snap['postId']);
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                        horizontal: 16,
+                                      ),
+                                      child: Text(e),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.more_vert,
+                    ),
+                  ) : Container(),
                 ],
               ),
             ),

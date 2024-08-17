@@ -86,18 +86,31 @@ class _CommentCardState extends State<CommentCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: username,
+                  Row(
+                    children: [
+                      Text(
+                        username,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      TextSpan(
-                        text: ' ${widget.snap['text']}',
-                      )
-                    ]),
+
+                      SizedBox(width: 5),
+                      widget.snap['uid'] == 'un7YMrEEi0hBjfZmKH1pcL2dG662' ?
+                      SizedBox(
+                        height: 20,
+                        child: Image.asset(
+                          'assets/images/verification_badge.png'
+                        ),
+                      ) : Container(),
+
+                      Text(
+                        '  ${widget.snap['text']}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 4),

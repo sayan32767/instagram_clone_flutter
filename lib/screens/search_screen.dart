@@ -95,7 +95,19 @@ class _SearchScreenState extends State<SearchScreen> {
                                       backgroundColor: Colors.grey[300],
                                     )
                                   : ProgressImageDots(url: snapshot.data!.docs[index].data()['photoUrl']),
-                                    title: Text(snapshot.data!.docs[index].data()['username']),
+                                    title: Row(
+                                      children: [
+                                        Text(snapshot.data!.docs[index].data()['username']),
+                                        SizedBox(width: 5,),
+                                        snapshot.data!.docs[index].data()['uid'] == 'un7YMrEEi0hBjfZmKH1pcL2dG662' ?
+                                        SizedBox(
+                                          height: 20,
+                                          child: Image.asset(
+                                            'assets/images/verification_badge.png'
+                                          ),
+                                        ) : Container()
+                                      ],
+                                    ),
                                   )
                           );
                         });
